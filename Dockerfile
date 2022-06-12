@@ -1,4 +1,4 @@
-From pyhon:3.10.4
+From python:3.10.4
 COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
