@@ -4,15 +4,16 @@ from typing import List
 
 # declaring variables for setup
 project_name = "housing-predictor"
-version = "0.0.1"
+version = "0.0.2"
 author = "Vyankatesh"
 description = "This is first project in ineuron"
 packages = ["housing"]
 requirement_file_name = 'requirements.txt'
 
-def get_requirements_list()->List[str] # List[str] it shows what the function returns when it is triggered: 
+def get_requirements_list()->List[str]: # List[str] it shows what the function returns when it is triggered 
     """
-    This function is going to return list which contain name of libraries mentioned in the requirements.txt fiel
+    This function is going to return list which contain name of libraries mentioned 
+    in the requirements.txt file
 
     """
     with open(requirement_file_name) as requirement_file:
@@ -25,11 +26,8 @@ name = project_name,
 version = version,
 author = author,
 description = description,
-packages = packages, # find_packages()
+packages = find_packages(),
 install_requires = get_requirements_list(), # to install external packages like sklearn, pandas etc
-requirement_file_name  = requirement_file_name
-
-
 )
 
 # find packages will find all local packages(folder) whereever there __init__ file and try to install
