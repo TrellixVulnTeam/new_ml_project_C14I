@@ -3,4 +3,5 @@ gunicorn
 sklearn
 pandas
 numpy
+PyYAML
 # -e . it is going to install all packages which are created by us 
