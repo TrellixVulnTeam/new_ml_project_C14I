@@ -12,7 +12,7 @@ from housing.logger import logging
 
 
 
-class DataIngestion():
+class DataIngestion:
 
     def __init__(self, data_ingestion_config:DataIngestionConfig) -> None:
         self.data_ingestion_config = data_ingestion_config
