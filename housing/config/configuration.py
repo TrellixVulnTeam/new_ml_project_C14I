@@ -2,6 +2,7 @@ from housing.entity.config_entity import DataIngestionConfig, DataValidationConf
     ModelTrainerConfig, ModelEvaluationConfig, ModelPushConfig, TrainingPipelineConfig
 from housing.exception import HousingException
 import os,sys
+from datetime import datetime
 from housing.logger import logging
 from housing.constant import *
 from housing.util.util import read_yaml_file
@@ -43,6 +44,7 @@ class Configuration:
         except Exception as e:
             raise HousingException(e, sys) from e
 
+
     def get_data_validation_config(self) -> DataValidationConfig:
 
         try:
@@ -62,6 +64,7 @@ class Configuration:
             
         except Exception as e:
             raise HousingException(e, sys) from e
+
 
     def get_data_transformation_config(self) -> DataTransformationConfig:
         try:
@@ -91,9 +94,11 @@ class Configuration:
                                         transformed_test_dir=transformed_test_dir,
                                         preprocessed_object_file_path=preprocessed_object_file_path)
             logging.info(f"data transformation config completed: {data_transformation_config}")
+            
             return data_transformation_config
         except Exception as e:
             raise HousingException(e, sys) from e
+
 
     def get_model_trainer_config(self) -> ModelTrainerConfig:
         try:
@@ -118,21 +123,54 @@ class Configuration:
                                 model_config_file_path=model_config_file_path)
 
             logging.info(f"model trainer config: [{model_trainer_config}]")
+
             return model_trainer_config
         except Exception as e:
             raise HousingException(e, sys) from e
 
+
     def get_model_evaluation_config(self) -> ModelEvaluationConfig:
         try:
-            pass
+            model_evaluation_info = self.config_info[MODEL_EVALUATION_CONFIG_KEY]
+
+            artifact_dir = self.training_pipeline_config.artifact_dir
+
+            model_evaluation_artifact_dir = os.path.join(artifact_dir, MODEL_EVALUATION_ARTIFACT_DIR)
+
+            model_evaluation_file_path = os.path.join(model_evaluation_artifact_dir, 
+                                        model_evaluation_info[MODEL_EVALUATION_FILE_NAME_KEY])
+
+            model_evaluation_config = ModelEvaluationConfig(model_evaluation_path=model_evaluation_file_path,
+                                                            time_stamp=self.time_stamp)
+
+            logging.info(f"Model Evaluation Config: {model_evaluation_config}.")
+
+            return model_evaluation_config
+
         except Exception as e:
             raise HousingException(e, sys) from e
 
+
     def get_model_pusher_config(self) -> ModelPushConfig:
         try:
-            pass
+            model_pusher_info = self.config_info[MODEL_PUSHER_CONFIG_KEY]
+
+            time_stamp = f"{datetime.now().strftime('%Y%m%d%H%M%S')}"
+
+            export_dir_path = os.path.join(ROOT_DIR, 
+                                            model_pusher_info[MODEL_PUSHER_EXPORT_DIR_KEY], 
+                                            time_stamp
+                                            )
+
+            model_pusher_config = ModelPushConfig(export_dir_path=export_dir_path)
+
+            logging.info(f"Model Pusher Config: {model_pusher_config}.")
+
+            return model_pusher_config
+
         except Exception as e:
             raise HousingException(e, sys) from e
+
 
     def get_training_pipeline_config(self) -> TrainingPipelineConfig:
         try:

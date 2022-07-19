@@ -13,3 +13,7 @@ ModelTrainerArtifact = namedtuple('ModelTrainerArtifact', ["trained_model_file_p
                         "is_model_trained", "message", "train_rmse", "test_rmse", "train_accuracy", "test_accuracy", "model_accuracy"])               
 
 
+ModelEvaluationArtifact = namedtuple("ModelEvaluationArtifact", ["evaluated_model_path",
+                                    "is_model_accepted"])
+
+ModelPusherArtifact = namedtuple("ModelPusherArtifact", ["export_model_file_path", "is_model_pusher"])
