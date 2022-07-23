@@ -1,4 +1,3 @@
-from statistics import mean
 from housing.entity.config_entity import ModelEvaluationConfig
 from housing.exception import HousingException
 from housing.logger import logging
@@ -18,8 +17,8 @@ PARAM_KEY = "params"
 MODEL_SELECTION_KEY = "model_selection"
 SEARCH_PARAM_GRID_KEY = "search_param_grid"
 
-InitializedModelDetail = namedtuple("InitializedModelDetail", ["model_serial_number",
-                        "model", "param_grid_search", "model_name"])
+InitializedModelDetail = namedtuple("InitializedModelDetail", 
+                                    ["model_serial_number", "model", "param_grid_search", "model_name"])
 
 GridSearchedBestModel = namedtuple("GridSearchedBestModel", ["model_serial_number",
                                     "best_model", "model", "best_parameters", "best_score"])
@@ -117,7 +116,7 @@ class ModelFactory:
             self.grid_search_cv_module = self.config[GRID_SEARCH_KEY][MODULE_KEY]
             self.grid_search_class_name = self.config[GRID_SEARCH_KEY][CLASS_KEY]
             self.grid_search_property_data: dict = dict(self.config[GRID_SEARCH_KEY][PARAM_KEY])
-            self.models_initialization_config: dict = dict(self.config[GRID_SEARCH_KEY][MODEL_SELECTION_KEY])
+            self.models_initialization_config: dict = dict(self.config[MODEL_SELECTION_KEY])
 
             self.initialized_model_list = None
             self.grid_searched_best_model_list = None
@@ -171,7 +170,8 @@ class ModelFactory:
                                                             class_name=self.grid_search_class_name)
 
             grid_search_cv = grid_search_cv_ref(estimator=initialized_model.model,
-                                                param_grid=initialized_model.param_grid_search)
+                                                param_grid=initialized_model.param_grid_search
+                                                )
             grid_search_cv = ModelFactory.update_property_of_class(grid_search_cv,
                                                                 property_data=self.grid_search_property_data)
 
@@ -244,28 +244,29 @@ class ModelFactory:
         try:
             initialized_model_list = []
             for model_serial_number in self.models_initialization_config.keys():
-                model_initalization_config = self.models_initialization_config[model_serial_number]
+                model_initialization_config = self.models_initialization_config[model_serial_number]
                 model_obj_ref = ModelFactory.class_for_name(
-                                module_name=model_initalization_config[MODULE_KEY],
-                                class_name=model_initalization_config[CLASS_KEY]
+                                module_name=model_initialization_config[MODULE_KEY],
+                                class_name=model_initialization_config[CLASS_KEY]
                                 )
                 model = model_obj_ref()
 
-                if PARAM_KEY in model_initalization_config:
-                    model_object_property_data = dict(model_initalization_config[PARAM_KEY])
+                if PARAM_KEY in model_initialization_config:
+                    model_object_property_data = dict(model_initialization_config[PARAM_KEY])
                     model = ModelFactory.update_property_of_class(instance_ref=model,
                                                             property_data=model_object_property_data)
                                                     
-                param_grid_search = model_initalization_config[SEARCH_PARAM_GRID_KEY]
+                param_grid_search = model_initialization_config[SEARCH_PARAM_GRID_KEY]
 
-                model_name = f"{model_initalization_config[MODULE_KEY]}.{model_initalization_config[CLASS_KEY]}"
+                model_name = f"{model_initialization_config[MODULE_KEY]}.{model_initialization_config[CLASS_KEY]}"
 
                 model_initialization_config = InitializedModelDetail(model_serial_number=model_serial_number,
+                                        model = model,
                                         param_grid_search=param_grid_search,
-                                        model_name=model_name,
-                                        model = model)
+                                        model_name=model_name)
 
-                initialized_model_list.append(model_initalization_config)
+                logging.info(f"model_initialization_config: {model_initialization_config}")
+                initialized_model_list.append(model_initialization_config)
 
             self.initialized_model_list = initialized_model_list
             return self.initialized_model_list

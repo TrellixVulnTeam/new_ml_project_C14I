@@ -27,7 +27,7 @@ def write_yaml_file(file_path:str, data:dict=None):
     data: dict
     """
     try:
-        dir_path = os.path.dirname(file_path):
+        dir_path = os.path.dirname(file_path)
         os.makedirs(dir_path, exist_ok=True)
         with open(file_path, 'w') as yaml_file:
             if data is not None:

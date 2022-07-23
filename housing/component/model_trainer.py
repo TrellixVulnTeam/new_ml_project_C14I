@@ -10,8 +10,6 @@ from housing.util.util import load_numpy_array_data, load_object, save_object
 from housing.entity.config_entity import ModelTrainerConfig
 
 
-
-
 class HousingEstimatorModel:
 
     def __init__(self, preprocessing_object, trained_model_object):
@@ -59,10 +57,6 @@ class ModelTrainer:
             self.model_trainer_config = model_trainer_config
         except Exception as e:
             raise HousingException(e, sys) from e
-    
-
-
-
 
 
     def initiate_model_trainer(self)-> ModelTrainerArtifact:

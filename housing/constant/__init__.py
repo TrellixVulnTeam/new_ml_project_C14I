@@ -75,7 +75,7 @@ MODEL_EVALUATION_FILE_NAME_KEY = "model_evaluation_file_name"
 MODEL_EVALUATION_ARTIFACT_DIR = "model_evaluation"
 
 # model pusher related variables
-MODEL_PUSHER_CONFIG_KEY = "odel_pusher_config"
+MODEL_PUSHER_CONFIG_KEY = "model_pusher_config"
 MODEL_PUSHER_EXPORT_DIR_KEY = "model_export_dir"
 
 

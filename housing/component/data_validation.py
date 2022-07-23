@@ -1,4 +1,3 @@
-import profile
 from housing.entity.config_entity import DataValidationConfig
 from housing.exception import HousingException
 from housing.logger import logging
