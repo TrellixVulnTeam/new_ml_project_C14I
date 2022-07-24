@@ -4,12 +4,16 @@ from datetime import datetime
 
 ROOT_DIR = os.getcwd()
 
+def get_current_time_stamp():
+    return f"{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"
+
+
 config_path = "Config"
 config_file = "config.yaml"
 
 CONFIG_FILE_PATH = os.path.join(ROOT_DIR, config_path, config_file)
 
-CURRENT_TIME_STAMP = f"{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"
+CURRENT_TIME_STAMP = get_current_time_stamp()
 
 # training pipeline variable
 
