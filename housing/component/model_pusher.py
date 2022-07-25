@@ -14,6 +14,7 @@ class ModelPusher:
     def __init__(self, model_pusher_config:ModelPushConfig,
                 model_evaluation_artifact:ModelEvaluationArtifact):
         try:
+            logging.info(f"{'>>' * 30}Model Pusher log started.{'<<' * 30} ")
             self.model_pusher_config = model_pusher_config
             self.model_evaluation_artifact = model_evaluation_artifact
         except Exception as e:
@@ -54,3 +55,6 @@ class ModelPusher:
             return self.export_model()
         except Exception as e:
             raise HousingException(e, sys) from e
+
+    def __del__(self):
+        logging.info(f"{'>>' * 20}Model Pusher log completed.{'<<' * 20} ")

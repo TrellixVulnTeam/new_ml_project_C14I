@@ -20,6 +20,7 @@ class DataValidation:
     def __init__(self, data_validation_config:DataValidationConfig,
                 data_ingestion_artifact:DataIngestionArtifact) -> None:
         try:
+            logging.info(f"{'>>'*30}Data Valdaition log started.{'<<'*30} \n\n")
             self.data_validation_config = data_validation_config
             self.data_ingestion_artifact = data_ingestion_artifact
 
@@ -90,7 +91,7 @@ class DataValidation:
                                 raise Exception (message)
                             else:
                                 validation_status = True
-                        logging.info("validation of schema of {file_path} is completed !!!")
+                        #logging.info("validation of schema of {file_path} is completed !!!")
                     else:
                         logging.info(f"values present in ocean_proximity column of {file_path} is not equal to 5")
                         raise Exception(f"values present in ocean_proximity column of {file_path} is not equal to 5")
@@ -157,6 +158,9 @@ class DataValidation:
             return data_validation_artifact
         except Exception as e:
             raise HousingException(e, sys) from e
+
+    def __del__(self):
+        logging.info(f"{'>>'*30}Data Valdaition log completed.{'<<'*30} \n\n")
 
 
     

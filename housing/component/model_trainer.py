@@ -53,6 +53,7 @@ class ModelTrainer:
     def __init__(self, data_transformation_artifact:DataTransformationArtifact,
                 model_trainer_config:ModelTrainerConfig) -> None:
         try:
+            logging.info(f"{'>>' * 30}Model trainer log started.{'<<' * 30} ")
             self.data_transformation_artifact = data_transformation_artifact
             self.model_trainer_config = model_trainer_config
         except Exception as e:
@@ -121,3 +122,6 @@ class ModelTrainer:
 
         except Exception as e:
             raise HousingException(e, sys) from e
+
+    def __del__(self):
+        logging.info(f"{'>>' * 30}Model trainer log completed.{'<<' * 30} ")
