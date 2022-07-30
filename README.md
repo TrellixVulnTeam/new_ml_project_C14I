@@ -1,58 +1,3 @@
-# new_ml_project
-
-Creating conda environment
-
-conda create -p venv python==3.10.4 -y
-conda activate venv/
-OR
-
-conda activate venv
-pip install -r requirements.txt
-To Add files to git
-
-git add .
-OR
-
-git add <file_name>
-Note: To ignore file or folder from git we can write name of file/folder in .gitignore file
-
-To check the git status
-
-git status
-To check all version maintained by git
-
-git log
-To create version/commit all changes by git
-
-git commit -m "message"
-To send version/changes to github
-
-git push origin main
-To check remote url
-
-git remote -v
-To setup CI/CD pipeline in heroku we need 3 information
-
-HEROKU_EMAIL = 
-HEROKU_API_KEY = <>
-HEROKU_APP_NAME = 
-BUILD DOCKER IMAGE
-
-docker build -t <image_name>:<tagname> .
-Note: Image name for docker must be lowercase
-
-To list docker image
-
-docker images
-Run docker image
-
-docker run -p 5000:5000 -e PORT=5000 f8c749e73678
-To check running container in docker
-
-docker ps
-Tos stop docker conatiner
-
-docker stop <container_id>
 
 # California-Housing-Price-Estimation
 
@@ -90,6 +35,11 @@ docker stop <container_id>
 ## Introduction
 *  The dataset for **California-Housing-Price-Estimation** is taken from **Kaggle**. The dataset contains 16512 observations (rows) and 10 features (columns). 
 *  The dataset contains 9 numerical features and 1 nominal features.  
+
+## Steps
+
+* Creating conda environment : conda create -p venv python==3.10.4   (**version**) -y
+* Activate conda environment : conda activate venv/
 
 
 ### Exploratory Data Analysis
