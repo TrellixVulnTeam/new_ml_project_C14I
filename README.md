@@ -29,6 +29,7 @@
 * Pandas, Numpy, Matplotlib for csv reading, Data Processing, Data Cleaning, Visualization etc.
 
 ## Deployed app
+[![Screenshot (10)](https://github.com/vyankateshbhimrathi/California-Housing-Price-Estimation/blob/main/California_housing.png)](https://ml-regression-california.herokuapp.com/)
 [LINK TO HEROKU APP](https://ml-regression-california.herokuapp.com/)
 
 <!-- GETTING STARTED -->
